@@ -18,7 +18,7 @@ import { flsModules } from "./modules.js";
 // reklamaBlocks.forEach(item => { item.remove(); })
 
 // Вар 2
-// document.querySelectorAll('.promo__adv > img').forEach(item => { item.remove(); })
+// document.querySelectorAll('.promo__adv img').forEach(item => { item.remove(); })
 
 // Вар 3
 // const promoBlocks = document.querySelectorAll('.promo__adv > img');
@@ -67,14 +67,31 @@ const movieDB = {
 		"Лига справедливости",
 		"Ла-ла лэнд",
 		"Одержимость",
-		"Скотт Пилигрим против..."
+		"Скотт Пилигрим против...",
 	]
 };
 
-const moviesCopy = movieDB.movies
+// Вар 1
+// const moviesCopy = Object.assign([], movieDB.movies.sort());
+// const parentList = document.querySelector('.promo__interactive-list');
+// parentList.innerHTML = '';
 
-const moviesItems = document.querySelectorAll('.promo__interactive-item');
-moviesItems.forEach(element => {
-	element
-});
+// moviesCopy.forEach((item, index) => {
+// 	parentList.insertAdjacentHTML('beforeend', `<div class='promo__interactive-item'>\n${index + 1}. ${item}\n<div class='delete'></div>`);
+// });
+
+// Вар 2
+// const moviesCopy = Object.assign([], movieDB.movies.sort());
+// const parentList = document.querySelector('.promo__interactive-list');
+// parentList.innerHTML = '';
+
+// for (let i = 0; i < moviesCopy.length; i++) {
+// 	const element = moviesCopy[i];
+// 	parentList.innerHTML += `
+// 	<div class='promo__interactive-item'>
+// 		${i + 1}. ${element}
+// 		<div class='delete'>
+// 		</div>
+// 	</div>`;
+// }
 //<task 4>=================================
