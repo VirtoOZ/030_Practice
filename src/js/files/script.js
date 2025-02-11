@@ -72,13 +72,13 @@ const movieDB = {
 };
 
 // Вар 1
-// const moviesCopy = Object.assign([], movieDB.movies.sort());
-// const parentList = document.querySelector('.promo__interactive-list');
-// parentList.innerHTML = '';
+const moviesCopy = Object.assign([], movieDB.movies.sort());
+const parentList = document.querySelector('.promo__interactive-list');
+parentList.innerHTML = '';
 
-// moviesCopy.forEach((item, index) => {
-// 	parentList.insertAdjacentHTML('beforeend', `<div class='promo__interactive-item'>\n${index + 1}. ${item}\n<div class='delete'></div>`);
-// });
+moviesCopy.forEach((item, index) => {
+	parentList.insertAdjacentHTML('beforeend', `<div class='promo__interactive-item'>\n${index + 1}. ${item}\n<div class='delete'></div>`);
+});
 
 // Вар 2
 // const moviesCopy = Object.assign([], movieDB.movies.sort());
@@ -95,3 +95,48 @@ const movieDB = {
 // 	</div>`;
 // }
 //<task 4>=================================
+
+
+//  Задания на урок 33:
+// <task 1>=================================
+/* 1) Реализовать функционал, что после заполнения формы и нажатия кнопки "Подтвердить" - 
+новый фильм добавляется в список. Страница не должна перезагружаться.
+Новый фильм должен добавляться в movieDB.movies.
+Для получения доступа к значению input - обращаемся к нему как input.value;
+P.S. Здесь есть несколько вариантов решения задачи, принимается любой, но рабочий.
+ */
+const btn = document.querySelector('button');
+const inpt = document.querySelector('.adding__input');
+btn.addEventListener('click', (e) => {
+	e.preventDefault();
+	movieDB.movies.push(inpt.value);
+	console.log(inpt.value);
+});
+
+// console.log(moviesCopy);
+// <task 1>=================================
+
+// <task 2>=================================
+// 2) Если название фильма больше, чем 21 символ - обрезать его и добавить три точки
+
+// <task 2>=================================
+
+// <task 3>=================================
+// 3) При клике на мусорную корзину - элемент будет удаляться из списка(сложно)
+
+// <task 3>=================================
+
+// <task 4>=================================
+// 4) Если в форме стоит галочка "Сделать любимым" - в консоль вывести сообщение:
+// "Добавляем любимый фильм"
+
+// <task 4>=================================
+
+// <task 5>=================================
+// 5) Фильмы должны быть отсортированы по алфавиту
+
+// <task 5>=================================
+
+'use strict';
+
+// Возьмите свой код из предыдущей практики
