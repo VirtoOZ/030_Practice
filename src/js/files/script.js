@@ -68,7 +68,6 @@ const movieDB = {
 		"Ла-ла лэнд",
 		"Одержимость",
 		"Скотт Пилигрим против...",
-		"1",
 	]
 };
 // получаем копию массива
@@ -116,29 +115,53 @@ function сollectList(array) {
 P.S. Здесь есть несколько вариантов решения задачи, принимается любой, но рабочий.
  */
 
-const btn = document.querySelector('button');
-const inpt = document.querySelector('.adding__input');
-btn.addEventListener('click', (e) => {
-	e.preventDefault();
-	const newArr = document.querySelectorAll('.promo__interactive-item');
-	let inptName = inpt.value.toLowerCase();
-	inptName.length > 21 ? inptName = `${inptName.slice(0, 21)}...` : '';
-	// есть ли в новом списке введёное значение
-	const test = () => {
-		for (const el of newArr) {
-			// console.log(el.textContent, typeof (el.textContent));
-			if (el.textContent != inptName) {
-				continue;
-			} else return true;
-		} return false;
-	};
-
-	if (!test()) {
-		arr.push(inptName);
-		сollectList(arr);
-		movieDB.movies = arr.slice();
+const content = document.querySelector('.promo__content');
+const btn = content.querySelector('button');
+const inpt = content.querySelector('.adding__input');
+const favorite = content.querySelector('[type="checkbox"]');
+const trash = content.querySelectorAll('.delete');
+content.addEventListener('click', (e) => {
+	if (e.target == btn) {
+		e.preventDefault();
+		const newArr = document.querySelectorAll('.promo__interactive-item');
+		let inptName = inpt.value.toLowerCase();
+		inptName.length > 21 ? inptName = `${inptName.slice(0, 21)}...` : '';
+		// есть ли в новом списке введёное значение
+		const test = () => {
+			if (inptName.length < 1) {
+				return true;
+			} else {
+				for (const el of newArr) {
+					if (el.textContent != inptName) {
+						continue;
+					} else return true;
+				} return false;
+			}
+		};
+		if (!test()) {
+			arr.push(inptName);
+			сollectList(arr);
+			movieDB.movies = arr.slice();
+		}
 	}
+	if (e.target == favorite) {
+		console.log('Добавляем любимый фильм');
+	}
+	trash.forEach(el => {
+		if (e.target == el) {
+			const elemText = el.parentElement.textContent;
+			for (let i = 0; i < arr.length; i++) {
+				const elem = arr[i];
+				if (elem == elemText) {
+					arr.splice(i, 1);
+				}
+			}
+			сollectList(arr);
+			movieDB.movies = arr.slice();
+		}
+	});
 });
+
 // <task 1>=================================
 
 // <task 2>=================================
@@ -162,6 +185,5 @@ btn.addEventListener('click', (e) => {
 
 // <task 5>=================================
 
-'use strict';
 
 // Возьмите свой код из предыдущей практики
