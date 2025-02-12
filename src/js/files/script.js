@@ -68,17 +68,27 @@ const movieDB = {
 		"Ла-ла лэнд",
 		"Одержимость",
 		"Скотт Пилигрим против...",
+		"1",
 	]
 };
+// получаем копию массива
 
-// Вар 1
-const moviesCopy = Object.assign([], movieDB.movies.sort());
-const parentList = document.querySelector('.promo__interactive-list');
-parentList.innerHTML = '';
-
-moviesCopy.forEach((item, index) => {
-	parentList.insertAdjacentHTML('beforeend', `<div class='promo__interactive-item'>\n${index + 1}. ${item}\n<div class='delete'></div>`);
+const arr = [];
+movieDB.movies.sort().forEach((el) => {
+	arr.push(el.toLowerCase());
 });
+const parentList = document.querySelector('.promo__interactive-list');
+сollectList(arr);
+// Вар 1
+
+
+// сборка элементов html
+function сollectList(array) {
+	parentList.innerHTML = '';
+	array.forEach((item, index) => {
+		parentList.insertAdjacentHTML('beforeend', `<div class='promo__interactive-item'>${item}<div class='delete'></div>`);
+	});
+}
 
 // Вар 2
 // const moviesCopy = Object.assign([], movieDB.movies.sort());
@@ -105,15 +115,30 @@ moviesCopy.forEach((item, index) => {
 Для получения доступа к значению input - обращаемся к нему как input.value;
 P.S. Здесь есть несколько вариантов решения задачи, принимается любой, но рабочий.
  */
+
 const btn = document.querySelector('button');
 const inpt = document.querySelector('.adding__input');
 btn.addEventListener('click', (e) => {
 	e.preventDefault();
-	movieDB.movies.push(inpt.value);
-	console.log(inpt.value);
-});
+	const newArr = document.querySelectorAll('.promo__interactive-item');
+	let inptName = inpt.value.toLowerCase();
+	inptName.length > 21 ? inptName = `${inptName.slice(0, 21)}...` : '';
+	// есть ли в новом списке введёное значение
+	const test = () => {
+		for (const el of newArr) {
+			// console.log(el.textContent, typeof (el.textContent));
+			if (el.textContent != inptName) {
+				continue;
+			} else return true;
+		} return false;
+	};
 
-// console.log(moviesCopy);
+	if (!test()) {
+		arr.push(inptName);
+		сollectList(arr);
+		movieDB.movies = arr.slice();
+	}
+});
 // <task 1>=================================
 
 // <task 2>=================================
